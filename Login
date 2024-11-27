@@ -1,0 +1,40 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Scanner;
+
+public class Login {
+    private static final String DATA_FILE = "data_akun.txt";
+
+    public boolean login(String username, String password) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(DATA_FILE))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] credentials = line.split(",");
+                if (credentials[0].equals(username) && credentials[1].equals(password)) {
+                    return true;
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Terjadi kesalahan saat membaca data: " + e.getMessage());
+        }
+        return false;
+    }
+
+    public static void main(String[] args) {
+        Login log = new Login();
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Masukkan username: ");
+        String username = scanner.nextLine();
+
+        System.out.print("Masukkan password: ");
+        String password = scanner.nextLine();
+
+        if (log.login(username, password)) {
+            System.out.println("Login berhasil!");
+        } else {
+            System.out.println("Login gagal! Username atau password salah.");
+        }
+    }
+}
