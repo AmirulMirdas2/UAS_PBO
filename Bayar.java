@@ -50,7 +50,7 @@ public class Bayar {
     }
 
     private void kurangiSaldo(double jumlah) {
-        File tempFile = new File("data_uang.txt");
+        File tempFile = new File("temp_uang.txt");
         try (BufferedReader reader = new BufferedReader(new FileReader(DATA_FILE));
              FileWriter writer = new FileWriter(tempFile)) {
 
